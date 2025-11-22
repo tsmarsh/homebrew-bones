@@ -2,7 +2,7 @@ class Bones < Formula
   desc "Makefile-based pipeline for generating books in multiple formats with AI assistance"
   homepage "https://github.com/tsmarsh/bones"
   url "https://github.com/tsmarsh/bones/archive/refs/tags/v1.0.0.tar.gz"
-  sha256 "" # Will need to be filled in when first release is created
+  sha256 "1c0d7ecccec209f075bdce58784bd9d2748398ecf08f87140735d4cd50b3fa7a"
   license "MIT"
   head "https://github.com/tsmarsh/bones.git", branch: "main"
 
