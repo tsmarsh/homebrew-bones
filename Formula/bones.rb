@@ -7,10 +7,10 @@ class Bones < Formula
   head "https://github.com/tsmarsh/bones.git", branch: "main"
 
   depends_on "python@3"
+  depends_on "pandoc"
 
-  # Optional dependencies for full functionality
-  depends_on "pandoc" => :optional
-  depends_on "tectonic" => :optional
+  # Recommended for PDF generation
+  depends_on "tectonic" => :recommended
 
   def install
     # Install using the Makefile with Homebrew's prefix
@@ -26,12 +26,8 @@ class Bones < Formula
     <<~EOS
       Bones has been installed!
 
-      Optional dependencies for full functionality:
-        - pandoc: For format conversion (PDF/EPUB/DOCX)
-        - tectonic: For PDF generation (recommended LaTeX engine)
-
-      Install them with:
-        brew install pandoc tectonic
+      For PDF generation, tectonic is recommended (and installed by default).
+      Alternatively, you can use system LaTeX (xelatex/lualatex).
 
       To get started:
         mkdir my-book && cd my-book
@@ -56,10 +52,8 @@ class Bones < Formula
     assert_predicate testpath/"chapters", :exist?
     assert_predicate testpath/"chapters/01-chapter-one.md", :exist?
 
-    # If pandoc is available, test PDF build
-    if which("pandoc")
-      system "#{bin}/bones", "pdf"
-      assert_predicate testpath/"book.pdf", :exist?
-    end
+    # Test PDF build (pandoc is now a required dependency)
+    system "#{bin}/bones", "pdf"
+    assert_predicate testpath/"book.pdf", :exist?
   end
 end
